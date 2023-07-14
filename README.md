@@ -1,6 +1,6 @@
 ## COCO-2017
 
-### Bounded Boxes Marking
+### YOLO Bounded Boxes Marking
 
 #### Marking TXT Files
 
