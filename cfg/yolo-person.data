@@ -1,0 +1,6 @@
+classes=1
+train=/work/himax/Yolo-Fastest/COCO-2017/train.txt
+valid=/work/himax/Yolo-Fastest/COCO-2017/valid.txt
+names=/work/himax/Yolo-Fastest/COCO-2017/cfg/yolo-person.names
+backup=/work/himax/Yolo-Fastest/COCO-2017/backup
+eval=coco
