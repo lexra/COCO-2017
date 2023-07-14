@@ -44,5 +44,7 @@ done | tee train.txt
 Generating the valid.txt with both XXX.txt / XXX.jpg co-existing. 
 
 ```bash
-for J in $(ls val2017 | grep txt | awk -F '.' '{print $1}'); do echo "$(pwd)/val2017/${J}.jpg" ; done | tee valid.txt
+for J in $(ls val2017 | grep txt | awk -F '.' '{print $1}'); \
+    do echo "$(pwd)/val2017/${J}.jpg" ; \
+done | tee valid.txt
 ```
