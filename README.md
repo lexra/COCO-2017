@@ -34,7 +34,7 @@ python3 COCO2YOLO/COCO2YOLO.py -j annotations/instances_train2017.json -o train2
 
 #### Train.txt
 
-Generating the train.txt with both XXX.txt / XXX.jpg co-existing. 
+Generating the train.txt with both XXX.txt / XXX.jpg co-existing / matching. 
 
 ```bash
 for J in $(ls train2017 | grep txt | awk -F '.' '{print $1}'); do \
@@ -44,7 +44,7 @@ done | tee train.txt
 
 #### Valid.txt
 
-Generating the valid.txt with both XXX.txt / XXX.jpg co-existing. 
+Generating the valid.txt with both XXX.txt / XXX.jpg co-existing / matching. 
 
 ```bash
 for J in $(ls val2017 | grep txt | awk -F '.' '{print $1}'); \
