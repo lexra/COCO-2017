@@ -2,6 +2,9 @@
 
 ### YOLO Bounded Boxes Marking
 
+![image](https://github.com/lexra/COCO-2017/assets/33512027/92ae9f85-cd36-4c56-a167-adf0c2426b85)
+
+
 #### Marking TXT Files
 
 ```bash
