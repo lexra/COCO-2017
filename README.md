@@ -27,4 +27,8 @@ cat train2017/000000581929.txt
 python3 COCO2YOLO/COCO2YOLO.py -j annotations/instances_train2017.json -o train2017
 ```
 
+### Train.txt
 
+```bash
+for J in $(ls train2017 | grep txt | awk -F '.' '{print $1}'); do echo "$(pwd)/train2017/${J}.jpg" ; done | tee train.txt
+```
