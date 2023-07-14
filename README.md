@@ -27,7 +27,7 @@ cat train2017/000000581929.txt
 python3 COCO2YOLO/COCO2YOLO.py -j annotations/instances_train2017.json -o train2017
 ```
 
-### Train / Valid
+### Train / Validation File
 
 #### Train.txt
 
