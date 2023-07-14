@@ -1,1 +1,30 @@
 ## COCO-2017
+
+### Bounded Boxes Marking
+
+#### Marking TXT Files
+
+```bash
+ls -l train2017
+...
+-rw-rw-r-- 1 jasonc jasonc  315416 Aug 16  2014 000000581929.jpg
+-rw-rw-r-- 1 jasonc jasonc      78 Jul 14 18:34 000000581929.txt
+...
+```
+
+```bash
+cat train2017/000000581929.txt
+```
+
+```bash
+17 0.539766 0.492976 0.317406 0.345796
+17 0.557742 0.265619 0.083922 0.087191
+```
+
+#### Annotations translation from a given JSON file
+
+```bash
+python3 COCO2YOLO/COCO2YOLO.py -j annotations/instances_train2017.json -o train2017
+```
+
+
