@@ -23,7 +23,7 @@ cat train2017/000000581929.txt
 
 #### Annotations translation from a given JSON file
 
-```bash
+```python
 python3 COCO2YOLO/COCO2YOLO.py -j annotations/instances_train2017.json -o train2017
 ```
 
