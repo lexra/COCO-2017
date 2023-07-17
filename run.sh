@@ -1,17 +1,29 @@
 #!/bin/bash -e
 
 ##############################
-NAME="yolo-grayscale"
-CFG="cfg/${NAME}.cfg"
-
-GPUS="-gpus 0"
-WEIGHTS=""
-
-##############################
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
+
+CONFIG_LIST=("yolo-grayscale" "yolo-person" "yolo-default" "yolo-fatest" "yolov3-tiny")
+TARGET_CONFIG=$1
+
+##########################################################
+function Usage () {
+        echo "Usage: $0 \${TARGET_CONFIG}"
+        echo "CONFIG list: "
+        for i in ${CONFIG_LIST[@]}; do echo "  - $i"; done
+        exit 0
+}
+if ! `IFS=$'\n'; echo "${CONFIG_LIST[*]}" | grep -qx "${TARGET_CONFIG}"`; then
+        Usage
+fi
+NAME=${TARGET_CONFIG}
+CFG="cfg/${NAME}.cfg"
+GPUS="-gpus 0"
+WEIGHTS=""
+
 
 ##############################
 if [ ! -e train2017.zip ]; then
@@ -77,9 +89,9 @@ if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.
 		--output_file backup/${NAME}.tflite
 
 	#python3 ../keras-YOLOv3-model-set/eval_yolo_fastest_160_1ch_tflite.py \
-	#       --model_path backup/${NAME}.tflite --anchors_path cfg/${NAME}.anchors --classes_path cfg/${NAME}.names --annotation_file coco/trainvalno5k.txt --json_name ${NAME}.json || true
+	#       --model_path backup/${NAME}.tflite --anchors_path cfg/${NAME}.anchors --classes_path cfg/${NAME}.names --annotation_file train.txt --json_name ${NAME}.json || true
 	#python3 ../pycooc_person.py \
-	#       --res_path ../keras-YOLOv3-model-set/coco_results/${NAME}.json --instances_json_file coco/images/annotations/instances_train2014.json || true
+	#       --res_path ../keras-YOLOv3-model-set/coco_results/${NAME}.json --instances_json_file annotations/instances_train2017.json || true
 
 	echo -e "${YELLOW} => Generate the ${NAME}.cc file ${NC}"
 	xxd -i backup/${NAME}.tflite > backup/${NAME}.cc
@@ -87,6 +99,6 @@ fi
 
 ##############################
 echo ""
-echo "${YELLOW} Detector Test: ${NC}"
-echo "${YELLOW} ../darknet detector test cfg/${NAME}.data cfg/${NAME}.cfg backup/${NAME}_final.weights COCO-2017/pixmaps/people.jpg ${NC}"
+echo -e "${YELLOW} Detector Test: ${NC}"
+echo -e "${YELLOW} ../darknet detector test cfg/${NAME}.data cfg/${NAME}.cfg backup/${NAME}_final.weights COCO-2017/pixmaps/people.jpg ${NC}"
 exit 0
