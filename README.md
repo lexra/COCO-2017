@@ -52,6 +52,8 @@ for J in $(ls val2017 | grep txt | awk -F '.' '{print $1}'); \
 done | tee valid.txt
 ```
 
+### Dark Detector Test
+
 
 ```
 ../darknet detector test \
