@@ -54,7 +54,12 @@ done | tee valid.txt
 
 
 ```
-../darknet detector test cfg/yolo-person.data cfg/yolo-person.cfg backup/yolo-person_final.weights pixmaps/three-companies.jpg -dont_show -thresh 0.60
+../darknet detector test \
+    cfg/yolo-person.data \
+    cfg/yolo-person.cfg \
+    backup/yolo-person_final.weights \
+    pixmaps/three-companies.jpg \
+    -dont_show -thresh 0.60
 ```
 
 ![image](https://github.com/lexra/COCO-2017/assets/33512027/1caa7d72-12d7-4fad-a48e-883942b22c0f)
