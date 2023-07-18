@@ -51,3 +51,17 @@ for J in $(ls val2017 | grep txt | awk -F '.' '{print $1}'); \
     do echo "$(pwd)/val2017/${J}.jpg" ; \
 done | tee valid.txt
 ```
+
+### Dark Detector Test
+
+
+```
+../darknet detector test \
+    cfg/yolo-person.data \
+    cfg/yolo-person.cfg \
+    backup/yolo-person_final.weights \
+    pixmaps/three-companies.jpg \
+    -dont_show -thresh 0.60
+```
+
+![image](https://github.com/lexra/COCO-2017/assets/33512027/a5de4938-adf2-405c-8e30-0a5c65952e83)
