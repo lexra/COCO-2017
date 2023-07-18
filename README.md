@@ -323,7 +323,7 @@ python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_tra
 
 Note please, we use the `trainvalno5k.txt` annotation file for `--annotation_file` input parameter. 
 
-#### XXD
+#### Convert to the .CC file
 
 ```
 xxd -i backup/yolo-person.tflite > backup/yolo-person.cc
