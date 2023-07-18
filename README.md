@@ -67,7 +67,7 @@ done | tee valid.txt
 <img src=https://github.com/lexra/COCO-2017/assets/33512027/a5de4938-adf2-405c-8e30-0a5c65952e83 width=800 />
 
 
-### .CC file Generation
+### Generate the .CC file
 
 #### Python Packages Requirement
 
