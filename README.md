@@ -2,7 +2,7 @@
 
 ### YOLO Bounded Boxes Marking
 
-![image](https://github.com/lexra/COCO-2017/assets/33512027/92ae9f85-cd36-4c56-a167-adf0c2426b85)
+<img src=https://github.com/lexra/COCO-2017/assets/33512027/92ae9f85-cd36-4c56-a167-adf0c2426b85 width=800 />
 
 
 #### Marking TXT Files
@@ -64,7 +64,7 @@ done | tee valid.txt
     -dont_show -thresh 0.60
 ```
 
-![image](https://github.com/lexra/COCO-2017/assets/33512027/a5de4938-adf2-405c-8e30-0a5c65952e83)
+<img src=https://github.com/lexra/COCO-2017/assets/33512027/a5de4938-adf2-405c-8e30-0a5c65952e83 width=800 />
 
 
 ### .CC file Generation
