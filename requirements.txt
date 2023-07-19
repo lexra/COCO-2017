@@ -1,3 +1,4 @@
+# pip3 install --upgrade pip
 typing-extensions==3.7.4.3
 python-dateutil==2.8.2
 packaging==21.2
@@ -37,3 +38,5 @@ imagecorruptions
 bokeh
 tidecv
 pyproject-toml
+keras_preprocessing
+six
