@@ -83,10 +83,8 @@ if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.
 		--output_path backup/${NAME}.h5
 
 	echo -e "${YELLOW} => Convert to Tensorflow Lite ${NC}"
-	python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py \
-		--keras_model_file backup/${NAME}.h5 \
-		--annotation_file train.txt \
-		--output_file backup/${NAME}.tflite
+	#python3 ../keras-YOLOv3-model-set/tools/model_converter/keras_to_tensorflow.py --input_model backup/${NAME}.h5 --output_model backup/${NAME}.tflite
+	python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py --keras_model_file backup/${NAME}.h5 --annotation_file train.txt --output_file backup/${NAME}.tflite
 
 	#python3 ../keras-YOLOv3-model-set/eval_yolo_fastest_160_1ch_tflite.py \
 	#       --model_path backup/${NAME}.tflite --anchors_path cfg/${NAME}.anchors --classes_path cfg/${NAME}.names --annotation_file train.txt --json_name ${NAME}.json || true
