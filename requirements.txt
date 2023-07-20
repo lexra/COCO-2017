@@ -38,5 +38,7 @@ imagecorruptions
 bokeh
 tidecv
 pyproject-toml
+keras==2.4.3
+segmentation-models
 keras_preprocessing
 six
