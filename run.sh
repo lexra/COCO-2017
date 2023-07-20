@@ -72,7 +72,7 @@ echo -e "${YELLOW} => Detector train ${NC}"
 [ -e ../data/labels/100_0.png ] && ln -sf ../data .
 mkdir -p backup
 [ -e backup/${NAME}_last.weights ] && WEIGHTS=backup/${NAME}_last.weights
-../darknet detector train cfg/${NAME}.data ${CFG} ${WEIGHTS} ${GPUS} -mjpeg_port 8090 -map
+../darknet detector train cfg/${NAME}.data ${CFG} ${WEIGHTS} ${GPUS} -mjpeg_port 8090
 
 ##############################
 if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.py ]; then
