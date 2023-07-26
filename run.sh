@@ -108,6 +108,6 @@ fi
 ##############################
 echo ""
 echo -e "${YELLOW} Detector Test: ${NC}"
-echo -e "${YELLOW} ../darknet detector test cfg/${NAME}.data cfg/${NAME}.cfg backup/${NAME}_final.weights COCO-2017/pixmaps/people.jpg ${NC}"
+echo -e "${YELLOW} ../darknet detector test cfg/${NAME}.data cfg/${NAME}.cfg backup/${NAME}_final.weights pixmaps/people.jpg ${NC}"
 echo ""
 exit 0
