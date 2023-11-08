@@ -35,11 +35,15 @@ if [ ! -e train2017/000000581929.jpg ]; then
 	rm -rf val2017 train2017 annotations
 	unzip -o train2017.zip
 	unzip -o val2017.zip
-	#rm -rf _train2017 ; mkdir -p _train2017; for J in `ls train2017`; do python3 change24.py $(pwd)/train2017/$J $(pwd)/_train2017/$J ; mv -fv $(pwd)/_train2017/$J $(pwd)/train2017/$J ; done
-	#rm -rf _val2017 ; mkdir -p _val2017; for J in `ls val2017`; do python3 change24.py $(pwd)/val2017/$J $(pwd)/_val2017/$J ; mv -fv $(pwd)/_val2017/$J $(pwd)/val2017/$J ; done
+	rm -rf _train2017 ; mkdir -p _train2017; for J in `ls train2017`; do python3 change24.py $(pwd)/train2017/$J $(pwd)/_train2017/$J ; mv -fv $(pwd)/_train2017/$J $(pwd)/train2017/$J ; done
+	rm -rf _val2017 ; mkdir -p _val2017; for J in `ls val2017`; do python3 change24.py $(pwd)/val2017/$J $(pwd)/_val2017/$J ; mv -fv $(pwd)/_val2017/$J $(pwd)/val2017/$J ; done
 fi
 rm -rfv annotations
 unzip -o annotations_trainval2017.zip
+
+##############################
+W=$(cat ${CFG} | grep width | awk -F '=' '{print $2}')
+H=$(cat ${CFG} | grep height | awk -F '=' '{print $2}')
 
 ##############################
 git clone https://github.com/tw-yshuang/coco2yolo.git || true
@@ -82,8 +86,11 @@ mkdir -p backup
 ../darknet detector train cfg/${NAME}.data ${CFG} ${WEIGHTS} ${GPUS} -mjpeg_port 8090 -map
 
 ##############################
-if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.py ]; then
+if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py ]; then
 	echo -e "${YELLOW} => Convert to Keras ${NC}"
+	git -C ../keras-YOLOv3-model-set checkout tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py
+	sed "s|model_input_shape = \"160x160\"|model_input_shape = \"${W}x${H}\"|" -i ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py
+
 	python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.py \
 		--config_path cfg/${NAME}.cfg \
 		--weights_path backup/${NAME}_final.weights \
@@ -91,13 +98,13 @@ if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.
 
 	echo -e "${YELLOW} => Convert to Tensorflow Lite ${NC}"
 	#python3 ../keras-YOLOv3-model-set/tools/model_converter/keras_to_tensorflow.py --input_model backup/${NAME}.h5 --output_model backup/${NAME}.tflite
-	python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py --keras_model_file backup/${NAME}.h5 --annotation_file train.txt --output_file backup/${NAME}.tflite
+	python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py --keras_model_file backup/${NAME}.h5 --annotation_file train.txt --output_file backup/${NAME}.tflite || true
 
 	echo -e "${YELLOW} => Generate backup/${NAME}-$(date +'%Y%m%d').cc file ${NC}"
-	xxd -i backup/${NAME}.tflite > backup/${NAME}-$(date +'%Y%m%d').cc
-	ls -l backup/${NAME}-$(date +'%Y%m%d').cc
-	echo ""
-	cat backup/${NAME}-$(date +'%Y%m%d').cc | grep tflite_len
+	xxd -i backup/${NAME}.tflite > backup/${NAME}-$(date +'%Y%m%d').cc || true
+	#ls -l backup/${NAME}-$(date +'%Y%m%d').cc
+	#echo ""
+	#cat backup/${NAME}-$(date +'%Y%m%d').cc | grep tflite_len
 
 	#python3 ../keras-YOLOv3-model-set/eval_yolo_fastest_160_1ch_tflite.py \
 	#       --model_path backup/${NAME}.tflite --anchors_path cfg/${NAME}.anchors --classes_path cfg/${NAME}.names --annotation_file train.txt --json_name ${NAME}.json || true
