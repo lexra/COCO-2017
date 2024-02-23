@@ -24,6 +24,12 @@ CFG="cfg/${NAME}.cfg"
 GPUS="-gpus 0"
 WEIGHTS=""
 
+##############################
+[ -e /usr/local/cuda-12.3/targets/x86_64-linux/lib ] && \
+        export LD_LIBRARY_PATH=/usr/local/cuda-12.3/targets/x86_64-linux/lib
+[ -e /usr/local/cuda-12.3/bin ] && \
+        export PATH=/usr/local/cuda-12.3/bin:${PATH}
+[ -e ../Makefile -a ! -e ../darknet ] && make -C ..
 
 ##############################
 if [ ! -e train2017.zip ]; then
@@ -94,7 +100,7 @@ if [ -e ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_tra
 	python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.py \
 		--config_path cfg/${NAME}.cfg \
 		--weights_path backup/${NAME}_final.weights \
-		--output_path backup/${NAME}.h5
+		--output_path backup/${NAME}.h5 || true
 
 	echo -e "${YELLOW} => Convert to Tensorflow Lite ${NC}"
 	#python3 ../keras-YOLOv3-model-set/tools/model_converter/keras_to_tensorflow.py --input_model backup/${NAME}.h5 --output_model backup/${NAME}.tflite
