@@ -251,7 +251,7 @@ person: 80%
 person: 40%
 ```
 
-### Generate the .CC file
+### Generate .CC file
 
 #### Python Packages Requirement
 
@@ -315,7 +315,8 @@ python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/convert.
 #### Convert to Tensorflow Lite
 
 ```bash
-python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py \
+python3 \
+    ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_train_quant_convert_demo.py \
     --keras_model_file backup/yolo-person.h5 \
     --annotation_file train.txt \
     --output_file backup/yolo-person.tflite
@@ -323,7 +324,7 @@ python3 ../keras-YOLOv3-model-set/tools/model_converter/fastest_1.1_160/post_tra
 
 Note please, we use the `trainvalno5k.txt` annotation file for `--annotation_file` input parameter. 
 
-#### Convert to the .CC file
+#### Generate .CC file
 
 ```bash
 xxd -i backup/yolo-person.tflite > backup/yolo-person.cc
