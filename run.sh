@@ -81,7 +81,7 @@ echo -e "${YELLOW} => Generate valid.txt for all val2017 annotations ${NC}"
 for J in $(ls val2017 | grep txt | awk -F '.txt' '{print $1}'); do echo "$(pwd)/val2017/${J}.jpg" ; done | tee valid.txt
 
 ##############################
-sed "s|/work/himax/Yolo-Fastest/COCO-2017|`pwd`|" -i cfg/${NAME}.data
+#sed "s|/work/himax/Yolo-Fastest/COCO-2017|`pwd`|" -i cfg/${NAME}.data
 
 ##############################
 echo -e "${YELLOW} => Detector train ${NC}"
